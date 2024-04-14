@@ -1,0 +1,232 @@
+version: '3.8'
+
+services: 
+  rotate1:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.openvpn
+      args:
+        - VPN_USER=${VPN_USER}
+        - VPN_PASS=${VPN_PASS}
+        - OVPN=${OVPN}
+    image: tatu-rotate-1:v1
+    restart: always
+    hostname: rotate1
+    cap_add:
+      - NET_ADMIN
+    networks:
+      global:
+        ipv4_address: 172.16.1.100
+    dns: ["8.8.8.8","1.1.1.1"]
+    devices:
+      - "/dev/net/tun:/dev/net/tun"
+    ports:
+      - "8120:8118/tcp"
+
+  rotate2:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.openvpn
+      args:
+        - VPN_USER=${VPN_USER}
+        - VPN_PASS=${VPN_PASS}
+        - OVPN=${OVPN2}
+    image: tatu-rotate-2:v1
+    restart: always
+    hostname: rotate2
+    cap_add:
+      - NET_ADMIN
+    networks:
+      global:
+        ipv4_address: 172.16.1.101
+    dns: ["8.8.8.8","1.1.1.1"]
+    devices:
+      - "/dev/net/tun:/dev/net/tun"
+    ports:
+      - "8121:8118/tcp"
+  
+  rotate3:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.openvpn
+      args:
+        - VPN_USER=${VPN_USER}
+        - VPN_PASS=${VPN_PASS}
+        - OVPN=${OVPN3}
+    image: tatu-rotate-3:v1
+    restart: always
+    hostname: rotate3
+    cap_add:
+      - NET_ADMIN
+    networks:
+      global:
+        ipv4_address: 172.16.1.102
+    dns: ["8.8.8.8","1.1.1.1"]
+    devices:
+      - "/dev/net/tun:/dev/net/tun"
+    ports:
+      - "8122:8118/tcp"
+  
+  rotate4:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.openvpn
+      args:
+        - VPN_USER=${VPN_USER}
+        - VPN_PASS=${VPN_PASS}
+        - OVPN=${OVPN4}
+    image: tatu-rotate-4:v1
+    restart: always
+    hostname: rotate4
+    cap_add:
+      - NET_ADMIN
+    networks:
+      global:
+        ipv4_address: 172.16.1.103
+    dns: ["8.8.8.8","1.1.1.1"]
+    devices:
+      - "/dev/net/tun:/dev/net/tun"
+    ports:
+      - "8123:8118/tcp"
+
+  rotate5:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.openvpn
+      args:
+        - VPN_USER=${VPN_USER}
+        - VPN_PASS=${VPN_PASS}
+        - OVPN=${OVPN5}
+    image: tatu-rotate-5:v1
+    restart: always
+    hostname: rotate5
+    cap_add:
+      - NET_ADMIN
+    networks:
+      global:
+        ipv4_address: 172.16.1.104
+    dns: ["8.8.8.8","1.1.1.1"]
+    devices:
+      - "/dev/net/tun:/dev/net/tun"
+    ports:
+      - "8124:8118/tcp"
+  
+  rotate6:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.openvpn
+      args:
+        - VPN_USER=${VPN_USER}
+        - VPN_PASS=${VPN_PASS}
+        - OVPN=${OVPN6}
+    image: tatu-rotate-6:v1
+    restart: always
+    hostname: rotate6
+    cap_add:
+      - NET_ADMIN
+    networks:
+      global:
+        ipv4_address: 172.16.1.105
+    dns: ["8.8.8.8","1.1.1.1"]
+    devices:
+      - "/dev/net/tun:/dev/net/tun"
+    ports:
+      - "8125:8118/tcp"
+  
+  rotate7:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.openvpn
+      args:
+        - VPN_USER=${VPN_USER}
+        - VPN_PASS=${VPN_PASS}
+        - OVPN=${OVPN7}
+    image: tatu-rotate-7:v1
+    restart: always
+    hostname: rotate7
+    cap_add:
+      - NET_ADMIN
+    networks:
+      global:
+        ipv4_address: 172.16.1.106
+    dns: ["8.8.8.8","1.1.1.1"]
+    devices:
+      - "/dev/net/tun:/dev/net/tun"
+    ports:
+      - "8126:8118/tcp"
+  
+  rotate8:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.openvpn
+      args:
+        - VPN_USER=${VPN_USER}
+        - VPN_PASS=${VPN_PASS}
+        - OVPN=${OVPN8}
+    image: tatu-rotate-8:v1
+    restart: always
+    hostname: rotate8
+    cap_add:
+      - NET_ADMIN
+    networks:
+      global:
+        ipv4_address: 172.16.1.107
+    dns: ["8.8.8.8","1.1.1.1"]
+    devices:
+      - "/dev/net/tun:/dev/net/tun"
+    ports:
+      - "8127:8118/tcp"
+  
+  rotate9:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.openvpn
+      args:
+        - VPN_USER=${VPN_USER}
+        - VPN_PASS=${VPN_PASS}
+        - OVPN=${OVPN9}
+    image: tatu-rotate-9:v1
+    restart: always
+    hostname: rotate9
+    cap_add:
+      - NET_ADMIN
+    networks:
+      global:
+        ipv4_address: 172.16.1.108
+    dns: ["8.8.8.8","1.1.1.1"]
+    devices:
+      - "/dev/net/tun:/dev/net/tun"
+    ports:
+      - "8128:8118/tcp"
+
+  rotate10:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.openvpn
+      args:
+        - VPN_USER=${VPN_USER}
+        - VPN_PASS=${VPN_PASS}
+        - OVPN=${OVPN10}
+    image: tatu-rotate-10:v1
+    restart: always
+    hostname: rotate10
+    cap_add:
+      - NET_ADMIN
+    networks:
+      global:
+        ipv4_address: 172.16.1.109
+    dns: ["8.8.8.8","1.1.1.1"]
+    devices:
+      - "/dev/net/tun:/dev/net/tun"
+    ports:
+      - "8129:8118/tcp"
+  
+
+networks:
+  global:
+    driver: "bridge"
+    ipam:
+      config:
+        - subnet: 172.16.1.0/24
+ 
+

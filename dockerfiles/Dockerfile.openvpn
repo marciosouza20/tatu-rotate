@@ -1,0 +1,48 @@
+# Docker image for ldap service
+FROM debian:12
+LABEL maintainer="ms109"
+SHELL ["/bin/bash", "-c"]
+
+# Updated container system
+RUN apt-get update && apt upgrade -y
+
+# Install tools
+RUN apt-get -y install openvpn net-tools inetutils-ping supervisor iproute2 tcpdump curl dnsutils vim privoxy ifupdown
+
+# Configure the privoxy
+RUN sed -i "s/127.0.0.1:8118/0.0.0.0:8118/g" /etc/privoxy/config
+
+# Receiving ARGS
+## Receiving the user and password
+ARG VPN_USER
+ENV VPN_USER=$VPN_USER
+ARG VPN_PASS
+ENV VPN_PASS=$VPN_PASS
+## Receiving the OVPN file
+ARG OVPN
+ENV OVPN=$OVPN
+
+# Create credentials file
+RUN echo $VPN_USER > /etc/openvpn/openvpn-credentials.txt
+RUN echo $VPN_PASS >> /etc/openvpn/openvpn-credentials.txt
+
+## TODO: - Implementar a cópia do ovpn correto a depender do caso
+#   Por exemplo, escolher US, copiar a VPN do US, copiar PT-BR se for PT-BR 
+COPY ovpns/${OVPN} /etc/openvpn/client
+
+## Enable authentication using creds-file 
+RUN echo "auth-user-pass /etc/openvpn/openvpn-credentials.txt" >>  /etc/openvpn/client/${OVPN}
+
+# Create a start script for OpenVPN to be managed by Supervisor
+# The 'exec' command is used in the script to replace the shell with the OpenVPN process.
+# This allows Supervisor to directly monitor and manage the OpenVPN process.
+
+RUN echo -e "#!/bin/bash\ncd /etc/openvpn/client\nexec openvpn --config ${OVPN}" > /etc/openvpn/client/start.sh && chmod +x /etc/openvpn/client/start.sh
+
+# Copy Supervisor configuration files for OpenVPN and Privoxy
+COPY config-templates/supervisord/openvpn.conf /etc/supervisor/conf.d/openvpn.conf
+COPY config-templates/supervisord/privoxy.conf /etc/supervisor/conf.d/privoxy.conf
+COPY config-templates/supervisord.conf /etc/supervisor/supervisord.conf
+
+# Set the entrypoint to Supervisor
+ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
