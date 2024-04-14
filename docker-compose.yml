@@ -1,6 +1,6 @@
 version: '3.8'
 
-services: 
+services:
   rotate1:
     build:
       context: .
@@ -16,8 +16,8 @@ services:
       - NET_ADMIN
     networks:
       global:
-        ipv4_address: 172.16.1.100
-    dns: ["8.8.8.8","1.1.1.1"]
+        ipv4_address: 10.47.0.100
+    dns: [ "8.8.8.8", "1.1.1.1" ]
     devices:
       - "/dev/net/tun:/dev/net/tun"
     ports:
@@ -38,13 +38,13 @@ services:
       - NET_ADMIN
     networks:
       global:
-        ipv4_address: 172.16.1.101
-    dns: ["8.8.8.8","1.1.1.1"]
+        ipv4_address: 10.47.0.101
+    dns: [ "8.8.8.8", "1.1.1.1" ]
     devices:
       - "/dev/net/tun:/dev/net/tun"
     ports:
       - "8121:8118/tcp"
-  
+
   rotate3:
     build:
       context: .
@@ -60,13 +60,13 @@ services:
       - NET_ADMIN
     networks:
       global:
-        ipv4_address: 172.16.1.102
-    dns: ["8.8.8.8","1.1.1.1"]
+        ipv4_address: 10.47.0.102
+    dns: [ "8.8.8.8", "1.1.1.1" ]
     devices:
       - "/dev/net/tun:/dev/net/tun"
     ports:
       - "8122:8118/tcp"
-  
+
   rotate4:
     build:
       context: .
@@ -82,8 +82,8 @@ services:
       - NET_ADMIN
     networks:
       global:
-        ipv4_address: 172.16.1.103
-    dns: ["8.8.8.8","1.1.1.1"]
+        ipv4_address: 10.47.0.103
+    dns: [ "8.8.8.8", "1.1.1.1" ]
     devices:
       - "/dev/net/tun:/dev/net/tun"
     ports:
@@ -104,13 +104,13 @@ services:
       - NET_ADMIN
     networks:
       global:
-        ipv4_address: 172.16.1.104
-    dns: ["8.8.8.8","1.1.1.1"]
+        ipv4_address: 10.47.0.104
+    dns: [ "8.8.8.8", "1.1.1.1" ]
     devices:
       - "/dev/net/tun:/dev/net/tun"
     ports:
       - "8124:8118/tcp"
-  
+
   rotate6:
     build:
       context: .
@@ -126,13 +126,13 @@ services:
       - NET_ADMIN
     networks:
       global:
-        ipv4_address: 172.16.1.105
-    dns: ["8.8.8.8","1.1.1.1"]
+        ipv4_address: 10.47.0.105
+    dns: [ "8.8.8.8", "1.1.1.1" ]
     devices:
       - "/dev/net/tun:/dev/net/tun"
     ports:
       - "8125:8118/tcp"
-  
+
   rotate7:
     build:
       context: .
@@ -148,13 +148,13 @@ services:
       - NET_ADMIN
     networks:
       global:
-        ipv4_address: 172.16.1.106
-    dns: ["8.8.8.8","1.1.1.1"]
+        ipv4_address: 10.47.0.106
+    dns: [ "8.8.8.8", "1.1.1.1" ]
     devices:
       - "/dev/net/tun:/dev/net/tun"
     ports:
       - "8126:8118/tcp"
-  
+
   rotate8:
     build:
       context: .
@@ -170,13 +170,13 @@ services:
       - NET_ADMIN
     networks:
       global:
-        ipv4_address: 172.16.1.107
-    dns: ["8.8.8.8","1.1.1.1"]
+        ipv4_address: 10.47.0.107
+    dns: [ "8.8.8.8", "1.1.1.1" ]
     devices:
       - "/dev/net/tun:/dev/net/tun"
     ports:
       - "8127:8118/tcp"
-  
+
   rotate9:
     build:
       context: .
@@ -192,8 +192,8 @@ services:
       - NET_ADMIN
     networks:
       global:
-        ipv4_address: 172.16.1.108
-    dns: ["8.8.8.8","1.1.1.1"]
+        ipv4_address: 10.47.0.108
+    dns: [ "8.8.8.8", "1.1.1.1" ]
     devices:
       - "/dev/net/tun:/dev/net/tun"
     ports:
@@ -204,9 +204,9 @@ services:
       context: .
       dockerfile: dockerfiles/Dockerfile.openvpn
       args:
-        - VPN_USER=${VPN_USER}
-        - VPN_PASS=${VPN_PASS}
-        - OVPN=${OVPN10}
+        VPN_USER: ${VPN_USER}
+        VPN_PASS: ${VPN_PASS}
+        OVPN: ${OVPN10}
     image: tatu-rotate-10:v1
     restart: always
     hostname: rotate10
@@ -214,19 +214,46 @@ services:
       - NET_ADMIN
     networks:
       global:
-        ipv4_address: 172.16.1.109
-    dns: ["8.8.8.8","1.1.1.1"]
+        ipv4_address: 10.47.0.109
+    dns:
+      - "8.8.8.8"
+      - "1.1.1.1"
     devices:
       - "/dev/net/tun:/dev/net/tun"
     ports:
       - "8129:8118/tcp"
-  
+
+  mubeng:
+    image: ghcr.io/kitabisa/mubeng:latest
+    volumes:
+      - ./config-templates:/data
+    command: -a :8080 -f /data/proxies.txt -m sequent -r 1
+    ports:
+      - "8080:8080"
+    depends_on:
+      - rotate1
+      - rotate2
+      - rotate3
+      - rotate4
+      - rotate5
+      - rotate6
+      - rotate7
+      - rotate8
+      - rotate9
+      - rotate10
+    restart: always
+    cap_add:
+      - NET_ADMIN
+    networks:
+      global:
+        ipv4_address: 10.47.0.200
+    dns:
+      - "8.8.8.8"
+      - "1.1.1.1"
 
 networks:
   global:
-    driver: "bridge"
+    driver: bridge
     ipam:
       config:
-        - subnet: 172.16.1.0/24
- 
-
+        - subnet: 10.47.0.0/24
