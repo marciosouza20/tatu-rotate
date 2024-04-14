@@ -5,7 +5,7 @@ the surfshark VPN. The main objective this project is a simple way to get a lot
 of different IPs to bypass Waf in tests.
 
 ## Overview
-Tatu-Rotate leverages Docker containers to establish VPN connections using Surfshark's OpenVPN configurations. Each container is configured to act as a proxy server on the host, with IP rotation managed by Mubeng. This setup facilitates the bypass of IP-based blocking mechanisms such as WAFs (Web Application Firewalls), brute-force defense mechanisms, API rate-limits, and geo-restrictions.
+Tatu-Rotate leverages Docker containers to establish VPN connections using Surfshark OpenVPN configurations. Each container is configured to act as a proxy server on the host, with IP rotation managed by Mubeng. This setup facilitates the bypass of IP-based blocking mechanisms such as WAFs (Web Application Firewalls), brute-force defense mechanisms, API rate-limits, and geo-restrictions.
 
 ## Key Features
 - **VPN Integration:** Utilizes Surfshark VPN configurations to connect each Docker container to a unique global IP.
