@@ -20,8 +20,7 @@ services:
     dns: [ "8.8.8.8", "1.1.1.1" ]
     devices:
       - "/dev/net/tun:/dev/net/tun"
-    ports:
-      - "8120:8118/tcp"
+    
 
   rotate2:
     build:
@@ -42,8 +41,6 @@ services:
     dns: [ "8.8.8.8", "1.1.1.1" ]
     devices:
       - "/dev/net/tun:/dev/net/tun"
-    ports:
-      - "8121:8118/tcp"
 
   rotate3:
     build:
@@ -64,8 +61,6 @@ services:
     dns: [ "8.8.8.8", "1.1.1.1" ]
     devices:
       - "/dev/net/tun:/dev/net/tun"
-    ports:
-      - "8122:8118/tcp"
 
   rotate4:
     build:
@@ -86,8 +81,6 @@ services:
     dns: [ "8.8.8.8", "1.1.1.1" ]
     devices:
       - "/dev/net/tun:/dev/net/tun"
-    ports:
-      - "8123:8118/tcp"
 
   rotate5:
     build:
@@ -108,8 +101,6 @@ services:
     dns: [ "8.8.8.8", "1.1.1.1" ]
     devices:
       - "/dev/net/tun:/dev/net/tun"
-    ports:
-      - "8124:8118/tcp"
 
   rotate6:
     build:
@@ -130,8 +121,6 @@ services:
     dns: [ "8.8.8.8", "1.1.1.1" ]
     devices:
       - "/dev/net/tun:/dev/net/tun"
-    ports:
-      - "8125:8118/tcp"
 
   rotate7:
     build:
@@ -152,8 +141,6 @@ services:
     dns: [ "8.8.8.8", "1.1.1.1" ]
     devices:
       - "/dev/net/tun:/dev/net/tun"
-    ports:
-      - "8126:8118/tcp"
 
   rotate8:
     build:
@@ -174,8 +161,6 @@ services:
     dns: [ "8.8.8.8", "1.1.1.1" ]
     devices:
       - "/dev/net/tun:/dev/net/tun"
-    ports:
-      - "8127:8118/tcp"
 
   rotate9:
     build:
@@ -196,8 +181,6 @@ services:
     dns: [ "8.8.8.8", "1.1.1.1" ]
     devices:
       - "/dev/net/tun:/dev/net/tun"
-    ports:
-      - "8128:8118/tcp"
 
   rotate10:
     build:
@@ -220,8 +203,6 @@ services:
       - "1.1.1.1"
     devices:
       - "/dev/net/tun:/dev/net/tun"
-    ports:
-      - "8129:8118/tcp"
 
   mubeng:
     image: ghcr.io/kitabisa/mubeng:latest
